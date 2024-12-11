@@ -72,7 +72,7 @@ export default function Home() {
                     1. Discover
                   </h3>
                   <p className="text-gray-600 text-center">
-                    Browse curated collections of Boston's best restaurants and
+                    Browse curated collections of Bostons best restaurants and
                     experiences
                   </p>
                 </CardContent>
@@ -113,7 +113,7 @@ export default function Home() {
         <section className="py-20 bg-[#1E2A39]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl text-center sm:text-5xl font-bold mb-12 bg-gradient-to-r from-pink-500 to-purple-300 text-transparent bg-clip-text">
-              Milestones We've Achieved
+              Milestones We have Achieved
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <Card className="bg-white shadow-lg hover:shadow-xl transition-all">

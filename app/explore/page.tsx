@@ -3,12 +3,12 @@
 import { useState, useEffect } from 'react';
 // import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Coffee, Filter, MapPin, Star, Utensils, Wine } from 'lucide-react';
+import { Filter, MapPin, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Navigation from '../components/navigation';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
 import Image from 'next/image';
 import { Footer } from '../components/footer';
 
