@@ -29,7 +29,7 @@ export function RewardInfluencer({ submissionId }: RewardInfluencerProps) {
       });
 
       if (!response.ok) {
-        throw new Error('Payment session creation failed.');
+        throw new Error('Payment session creation failed');
       }
 
       // Handle the successful reward logic here, e.g., updating the UI or confirming the payment
