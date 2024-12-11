@@ -25,7 +25,7 @@ export default function Home() {
             Get Paid to Eat & Share 🍽️
           </h1>
           <p className="text-xl sm:text-2xl mb-8">
-            Join Boston's coolest micro-influencer platform.
+            Join Bostons coolest micro-influencer platform.
             <br />
             Discover restaurants, share experiences, earn rewards.
           </p>
