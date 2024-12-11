@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { supabase } from '@/lib/supabase';
 
 export default function AnalyticsDashboard() {
   const [analytics, setAnalytics] = useState({
@@ -16,34 +15,38 @@ export default function AnalyticsDashboard() {
   }, []);
 
   async function fetchAnalytics() {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
+    try {
+      const userResponse = await fetch('/api/user');
+      const user = await userResponse.json();
+      if (!user) return;
 
-    const { count: campaignCount } = await supabase
-      .from('campaigns')
-      .select('*', { count: 'exact' })
-      .eq('business_id', user.id);
+      const campaignResponse = await fetch(
+        `/api/campaigns?businessId=${user.id}`
+      );
+      const campaignCount = await campaignResponse.json();
 
-    const { count: submissionCount } = await supabase
-      .from('submissions')
-      .select('*', { count: 'exact' })
-      .eq('business_id', user.id);
+      const submissionResponse = await fetch(
+        `/api/submissions?businessId=${user.id}`
+      );
+      const submissionCount = await submissionResponse.json();
 
-    const { data: rewards } = await supabase
-      .from('rewards')
-      .select('amount')
-      .eq('business_id', user.id);
-    const totalRewards = rewards
-      ? rewards.reduce((sum: number, reward: { amount: number }) => sum + reward.amount, 0)
-      : 0;
+      const rewardsResponse = await fetch(`/api/rewards?businessId=${user.id}`);
+      const rewards = await rewardsResponse.json();
+      const totalRewards = rewards
+        ? rewards.reduce(
+            (sum: number, reward: { amount: number }) => sum + reward.amount,
+            0
+          )
+        : 0;
 
-    setAnalytics({
-      totalCampaigns: campaignCount || 0,
-      totalSubmissions: submissionCount || 0,
-      totalRewards: totalRewards,
-    });
+      setAnalytics({
+        totalCampaigns: campaignCount || 0,
+        totalSubmissions: submissionCount || 0,
+        totalRewards: totalRewards,
+      });
+    } catch (error) {
+      console.error('Error fetching analytics:', error);
+    }
   }
 
   return (

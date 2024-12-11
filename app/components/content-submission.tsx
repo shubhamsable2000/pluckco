@@ -7,8 +7,6 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 
-import { supabase } from '@/lib/supabase';
-
 interface ContentSubmissionProps {
   campaignId: string;
 }
@@ -21,11 +19,18 @@ export function ContentSubmission({ campaignId }: ContentSubmissionProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { error } = await supabase
-        .from('submissions')
-        .insert({ campaign_id: campaignId, link, description });
+      // Replace this part with your API call (e.g., using fetch or axios)
+      const response = await fetch('/api/submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ campaign_id: campaignId, link, description }),
+      });
 
-      if (error) throw error;
+      if (!response.ok) {
+        throw new Error('Failed to submit content');
+      }
 
       toast({
         title: 'Content submitted',
